@@ -29,7 +29,7 @@ ffmpeg -hide_banner -loglevel warning -y -i "$input" -c:v libx264 \
 # Get the size of the output file and modify the quality accordingly to fit in
 # 20 MB
 output_size=$(stat -c%s "$output")
-multiplier=$(echo "scale=2; $output_size / 98000000" | bc)
+multiplier=$(echo "scale=2; $output_size / 19000000" | bc)
 # don't forget to remove the k from quality
 quality_without_k=${quality%k}
 new_quality=$(echo "scale=0; $quality_without_k / $multiplier" | bc)
