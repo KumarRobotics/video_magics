@@ -2,18 +2,30 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 
+# Check for input arguments. Only a single argument is allowed, the file name
+if [ "$#" -ne 1 ]; then
+  echo -e "${RED}Illegal number of parameters"
+  echo -e "${RED}Usage: size_reducer.sh <input_video>"
+  exit 1
+fi
+
 # Input video is the first argument
 # Output video has the same format, but with mp4 extension and with _reduced suffix
 input=$1
 output=${input%.*}_reduced.mp4
-#
-# Set the quality to 950k
+
+# Check that the input file exists
+if [ ! -f "$input" ]; then
+  echo -e "${RED}File $input does not exist"
+  exit 1
+fi
+
+# Set the initial quality to 950k
 quality=5000k
 
 # Print in yellow input and quality
 echo -e "${YELLOW}Input: $input"
 echo -e "${YELLOW}Quality: $quality"
-
 
 # H265
 # ffmpeg -y -i "$input" -c:v libx265 -b:v "$quality" -x265-params pass=1 -an -f
