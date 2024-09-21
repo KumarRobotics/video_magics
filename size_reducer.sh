@@ -5,7 +5,7 @@ YELLOW='\033[1;33m'
 # Input video is the first argument
 # Output video has the same format, but with mp4 extension and with _reduced suffix
 input=$1
-output=${input%.*}.mp4
+output=${input%.*}_reduced.mp4
 #
 # Set the quality to 950k
 quality=5000k
