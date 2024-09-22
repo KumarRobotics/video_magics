@@ -5,8 +5,8 @@ YELLOW='\033[1;33m'
 ########################################
 # Parameters
 # Modify these to fit your needs
-initial_quality=5000k # Initial quality to estimate the output size
-target_size=18000000 # Target size in bytes. Make it slightly smaller than 20*2**6
+initial_quality=1000k # Initial quality to estimate the output size
+target_size=19500000 # Target size in bytes. Make it slightly smaller than 20*2**6
 encoder=x264 # Either x264 or x265
 ########################################
 
