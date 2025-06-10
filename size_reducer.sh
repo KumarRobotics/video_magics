@@ -50,9 +50,9 @@ fi
 
 # Perform first compression
 echo -e "${GREEN}Performing first compression"
-ffmpeg -hide_banner -loglevel warning -y -i "$input" $libx -b:v "$quality" \
-  $xparams pass=1 -an -f null /dev/null && \
-  ffmpeg -hide_banner -loglevel warning -y -i "$input" $libx -b:v "$quality" \
+ffmpeg -hide_banner -loglevel warning -y -i "$input" $libx -pix_fmt yuv420p -b:v "$quality" \
+  $xparams pass=1  -an -f null /dev/null && \
+  ffmpeg -hide_banner -loglevel warning -y -i "$input" $libx -pix_fmt yuv420p -b:v "$quality" \
   $xparams pass=2 -c:a aac -b:a 64k "$output"
 
 # Get the size of the output file and modify the quality accordingly to fit
@@ -68,9 +68,9 @@ echo -e "${GREEN}New quality: $new_quality"
 
 # Compress again
 echo -e "${GREEN}Performing second compression"
-ffmpeg -hide_banner -loglevel warning -y -i "$input" $libx -b:v "$new_quality" \
+ffmpeg -hide_banner -loglevel warning -y -i "$input" $libx -pix_fmt yuv420p -b:v "$new_quality" \
   $xparams pass=1 -an -f null /dev/null && \
-  ffmpeg -hide_banner -loglevel warning -y -i "$input" $libx -b:v "$new_quality" \
+  ffmpeg -hide_banner -loglevel warning -y -i "$input" $libx -pix_fmt yuv420p -b:v "$new_quality" \
   $xparams pass=2 -c:a aac -b:a 64k "$output"
 
 # Get final size
