@@ -67,11 +67,12 @@ new_quality=${new_quality}k
 echo -e "${GREEN}New quality: $new_quality"
 
 # Compress again
+# +faststart puts the moov atom first: required for reliable PowerPoint/WMP playback
 echo -e "${GREEN}Performing second compression"
 ffmpeg -hide_banner -loglevel warning -y -i "$input" $libx -pix_fmt yuv420p -b:v "$new_quality" \
   $xparams pass=1 -an -f null /dev/null && \
   ffmpeg -hide_banner -loglevel warning -y -i "$input" $libx -pix_fmt yuv420p -b:v "$new_quality" \
-  $xparams pass=2 -c:a aac -b:a 64k "$output"
+  $xparams pass=2 -movflags +faststart -c:a aac -b:a 64k "$output"
 
 # Get final size
 output_size=$(stat -c%s "$output")
